@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://www.freevector.com/uploads/vector/preview/22690/abstract_mess.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        #login-form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        #login-form {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: rgb(75, 75, 75);
+            margin: 20px;
+            transition: margin 0.5s, border 0.5s;
+            animation: borderChange 5s infinite alternate;
+        }
+
+        @keyframes borderChange {
+            from {
+                margin: 20px;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+            }
+
+            to {
+                margin: 10px;
+                border: 10px solid rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: rgb(75, 75, 75);
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: rgb(78, 84, 200);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            animation: buttonColorChange 5s infinite alternate;
+        }
+
+        @keyframes buttonColorChange {
+            from {
+                background-color: rgb(78, 84, 200);
+                color: #fff;
+            }
+
+            to {
+                background-color: rgb(200, 0, 0);
+                color: #fff;
+            }
+        }
+
+        .led-text {
+            animation: textLed 3s infinite alternate;
+            color: rgb(75, 75, 75);
+            transition: color 0.5s;
+        }
+
+        @keyframes textLed {
+            from {
+                color: rgb(75, 75, 75);
+            }
+
+            to {
+                color: rgb(0, 200, 0);
+            }
+        }
+
+        .error-message {
+            color: rgb(200, 0, 0);
+            margin-top: 10px;
+            transition: color 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-form-wrapper">
+        <div id="login-form">
+            <form id="login-form-elem" onsubmit="loginUser(event)">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Log in</button>
+            </form>
+
+            <p class="led-text">Don't have an account? Register below:</p>
+
+            <form id="register-form-elem" onsubmit="registerUser(event)">
+                <label for="new-username">New Username (at least 4 characters):</label>
+                <input type="text" id="new-username" name="new-username" pattern=".{4,}" title="At least 4 characters required" required>
+
+                <label for="new-password">New Password (at least 5 characters):</label>
+                <input type="password" id="new-password" name="new-password" pattern=".{5,}" title="At least 5 characters required" required>
+
+                <button type="submit">Register</button>
+            </form>
+
+            <p class="error-message" id="error-message"></p>
+        </div>
+    </div>
+
+    <script>
+        let loginAttempts = 0;
+
+        function loginUser(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'correctUsername' && password === 'correctPassword') {
+                document.getElementById('error-message').innerText = 'Login successful. Redirecting...';
+                setTimeout(() => {
+                    window.location.href = 'https://example.com';
+                }, 3000);
+            } else {
+                document.getElementById('error-message').innerText = 'Invalid username or password';
+
+                loginAttempts++;
+                if (loginAttempts >= 3) {
+                    setTimeout(() => {
+                        window.open('https://youtu.be/SA43wEJ9K7w', '_blank');
+                    }, 5000);
+                }
+            }
+        }
+
+        function registerUser(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            if (newUsername.length >= 4 && newPassword.length >= 5) {
+                // Registration successful, you can store the data or perform additional actions
+                document.getElementById('error-message').innerText = 'Registration successful';
+            } else {
+                document.getElementById('error-message').innerText = 'Invalid username or password';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
