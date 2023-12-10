@@ -10,4 +10,3 @@ feat: Updated login/register form
 - Open YouTube link in a new tab after 3 unsuccessful login attempts.
 - Introduced login attempts counter with a maximum of 3 attempts.
 
-Closes #1 (if applicable - replace with the actual issue number)
